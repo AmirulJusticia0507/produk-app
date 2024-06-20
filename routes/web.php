@@ -22,3 +22,18 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+// Routes for product management
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/products', function () {
+        return Inertia::render('ProductIndex');
+    })->name('products.index');
+
+    Route::get('/products/create', function () {
+        return Inertia::render('ProductCreate');
+    })->name('products.create');
+
+    Route::get('/products/edit/{id}', function ($id) {
+        return Inertia::render('ProductEdit', ['id' => $id]);
+    })->name('products.edit');
+});
